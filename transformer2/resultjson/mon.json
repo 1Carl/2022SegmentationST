@@ -1,0 +1,44 @@
+[
+{
+      "distance": 0.15,
+      "precision": 80.7909604519774,
+      "recall": 89.375,
+      "f_measure": 84.86646884272996,
+      "category": "000"
+},
+{
+      "distance": 0.8590909090909091,
+      "precision": 78.54166666666667,
+      "recall": 72.5,
+      "f_measure": 75.39999999999999,
+      "category": "010"
+},
+{
+      "distance": 0.17056396148555708,
+      "precision": 94.17409184372858,
+      "recall": 94.49793672627236,
+      "f_measure": 94.33573635427396,
+      "category": "100"
+},
+{
+      "distance": 0.0,
+      "precision": 100.0,
+      "recall": 100.0,
+      "f_measure": 100.0,
+      "category": "101"
+},
+{
+      "distance": 0.7019108280254777,
+      "precision": 89.40397350993378,
+      "recall": 84.65510881593508,
+      "f_measure": 86.96475937855247,
+      "category": "110"
+},
+{
+      "distance": 0.46860158311345645,
+      "precision": 89.47144075021313,
+      "recall": 86.48537288833951,
+      "f_measure": 87.95306934841818,
+      "category": "all"
+}
+]

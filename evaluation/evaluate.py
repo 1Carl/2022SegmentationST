@@ -6,7 +6,7 @@ Returns precision, recall, f-measure, and mean Levenhstein distance.
 
 from collections import defaultdict
 import numpy as np
-
+import json
 
 def distance(str1, str2):
     """Simple Levenshtein implementation for evalm."""
@@ -82,6 +82,8 @@ def stratify(sequence, labels):
 
 
 def main(args):
+    out_file = open(args.out, "w")
+    out_file.write("[\n")
     gold_data = read_tsv(args.gold, args.category)
     guess_data = read_tsv(args.guess, False)  # only second column is needed
     assert len(gold_data["segments"]) == len(guess_data["segments"]), \
@@ -112,12 +114,17 @@ def main(args):
                 dists_by_cat[cat],
                 overlaps_by_cat[cat],
                 gold_lens_by_cat[cat],
-                pred_lens_by_cat[cat]
+                pred_lens_by_cat[cat], 
             )
-            print_numbers(cat_stats, cat=cat)
+            cat_stats["category"] = cat
+            json.dump(cat_stats, out_file, indent = 6)
+            out_file.write(",\n")
 
     overall_stats = compute_stats(dists, n_overlaps, gold_lens, pred_lens)
-    print_numbers(overall_stats)
+    overall_stats["category"] = "all"
+    json.dump(overall_stats, out_file, indent = 6)
+    out_file.write("\n]")
+    out_file.close()
 
 
 if __name__ == "__main__":
@@ -125,6 +132,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='SIGMORPHON 2022 Morpheme Segmentation Shared Task Evaluation')
     parser.add_argument("--gold", help="Gold standard", required=True, type=str)
     parser.add_argument("--guess", help="Model output", required=True, type=str)
+    parser.add_argument("--out", help="result output", required=True, type=str)
     parser.add_argument("--category", help="Morphological category", action="store_true")
     opt = parser.parse_args()
     main(opt)
